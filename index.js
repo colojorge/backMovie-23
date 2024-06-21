@@ -1,9 +1,17 @@
 const express = require('express');
 const app = express();
 
+const path = require('path');
+
+app.use(express.json());
+
+app.use('/actores', require("./routes/actores.router"));
+
+
 app.get('/', (req, res)=>{
-    res.send('chau');
+    res.send('Hola, conectado BD alwaysdata');
 });
+
 
 const PORT = process.env.PORT || 3000;
 
