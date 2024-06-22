@@ -33,5 +33,4 @@ connection.connect((error) => {
     console.log('Conectado a la BD');
 });
 
-
 module.exports = connection;
