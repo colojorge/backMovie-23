@@ -9,7 +9,7 @@ app.use('/actores', require("./routes/actores.router"));
 
 
 app.get('/', (req, res)=>{
-    res.send('Hola, conectado BD alwaysdata');
+    res.send('Proyecto integrador Grupo 23');
 });
 
 
