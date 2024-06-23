@@ -30,6 +30,7 @@ const generos = (req,res) => {
 };
 
 
+
 module.exports = {
     NewGenero,
     generos,
