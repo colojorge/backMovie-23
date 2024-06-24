@@ -24,7 +24,7 @@ const actorID = (req, res) => {
         }
 
         if (rows.length == 0) { // si el id buscado en la barra de navegacion no existe, 404
-            return res.status(404).json({ error: "No existe el actor" })
+            return res.status(404).json({ error: "No existe el actor" });
         }
 
         res.json(rows[0]); // [0] nos devuelve un solo objeto del arreglo, ya que actores trae varios objetos
