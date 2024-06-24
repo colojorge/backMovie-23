@@ -7,6 +7,7 @@ app.use(express.json());
 
 app.use('/actores', require("./routes/actores.router"));
 app.use('/generos', require("./routes/generos.router"));
+app.use('/comentarios', require("./routes/comentarios.router"));
 
 app.get('/', (req, res)=>{
     res.send('Proyecto integrador Grupo 23');
