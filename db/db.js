@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-require('dotenv').config();
+require('dotenv').config(); //conviene ejecutarlo en index.js para que este global 
 
 // conectando en mi BD local para prácticar
 // const connection = mysql.createConnection({
