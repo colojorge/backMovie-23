@@ -16,7 +16,6 @@ const { emailExiste, existeUsuarioPorId } = require('../helpers/db-validator');
 
 const router = Router();
 
-
 //Obtener todos los usuarios
 router.get('/', obtenerUsuario);
 

@@ -36,7 +36,7 @@ const actualizarPelicula = async (req, res) => {
         if (updatedRows === 0) {
             return res.status(404).json({ message: 'Película no encontrada' });
         }
-        res.status(200).json({ message: 'Película actualizada' });
+        res.status(200).json({ message: 'Película actualizada', pelicula: updatedRows });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -48,7 +48,7 @@ const eliminarPelicula = async (req, res) => {
         if (deletedRows === 0) {
             return res.status(404).json({ message: 'Película no encontrada' });
         }
-        res.status(200).json({ message: 'Película eliminada' });
+        res.status(200).json({ message: 'Película eliminada con exito' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

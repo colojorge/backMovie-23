@@ -1,7 +1,9 @@
 require('dotenv').config();
 const mysql = require('mysql2/promise');
 
-// Crear un pool de conexiones, pero lo llamaremos 'connection'
+/*Un pool de conexiones es una técnica utilizada para manejar conexiones a una base de datos de manera eficiente, especialmente en entornos donde múltiples solicitudes pueden necesitar acceder a la base de datos simultáneamente.*/
+
+// Crear un pool de conexiones
 const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
