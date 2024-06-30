@@ -5,10 +5,7 @@ const createMovie = async ({ titulo, año_estreno, genero_id, director, califica
     let dbconnection;
 
     try {
-        // Validar que todos los campos requeridos estén presentes
-        /*if (!titulo || !año_estreno || !genero_id || !director || !calificacion || !Array.isArray(nombre_actor) || nombre_actor.length === 0) {
-            throw new Error('Todos los campos son requeridos y nombre_actor debe ser un array no vacío');
-        }*/
+
 
         /*Al iniciar una transacción, es crucial asegurarse de que todas las operaciones dentro de esa transacción se realicen utilizando la misma conexión. Esto garantiza que la transacción sea atómica, es decir, que todas las operaciones se completen correctamente o ninguna de ellas se aplique.*/
 
@@ -189,7 +186,7 @@ const updateMovie = async (id, peliculaData) => {
         }
 
         await dbconnection.commit();
-        
+
         return { id, titulo, año_estreno, genero_id, director, calificacion, actores };
 
     } catch (error) {
