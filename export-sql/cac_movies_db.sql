@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-06-2024 a las 00:16:02
+-- Tiempo de generación: 30-06-2024 a las 23:52:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `actores` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(255) NOT NULL
+  `nombre_actor` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `actores`
 --
 
-INSERT INTO `actores` (`id`, `nombre`) VALUES
+INSERT INTO `actores` (`id`, `nombre_actor`) VALUES
 (1, 'Ellen Burstyn'),
 (2, 'Linda Blair'),
 (3, 'Anthony Perkins'),
@@ -136,7 +136,10 @@ INSERT INTO `actores` (`id`, `nombre`) VALUES
 (97, 'Chris Pratt'),
 (98, 'Zoe Saldana'),
 (99, 'Josh Brolin'),
-(100, 'Tom Hiddleston');
+(100, 'Tom Hiddleston'),
+(102, 'Nuevo Actor'),
+(103, 'Emma Stone'),
+(104, 'Robert De Nipo');
 
 -- --------------------------------------------------------
 
@@ -155,10 +158,6 @@ CREATE TABLE `actores_peliculas` (
 --
 
 INSERT INTO `actores_peliculas` (`id`, `actor_id`, `pelicula_id`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 2),
-(4, 4, 2),
 (5, 5, 3),
 (6, 6, 3),
 (7, 7, 4),
@@ -185,13 +184,10 @@ INSERT INTO `actores_peliculas` (`id`, `actor_id`, `pelicula_id`) VALUES
 (28, 28, 18),
 (29, 29, 19),
 (30, 30, 19),
-(31, 31, 20),
-(32, 32, 20),
 (33, 33, 21),
 (34, 34, 21),
 (35, 35, 22),
 (36, 36, 22),
-(37, 37, 20),
 (38, 38, 17),
 (39, 39, 24),
 (40, 40, 24),
@@ -231,7 +227,39 @@ INSERT INTO `actores_peliculas` (`id`, `actor_id`, `pelicula_id`) VALUES
 (74, 75, 46),
 (75, 76, 46),
 (76, 77, 47),
-(77, 78, 47);
+(77, 78, 47),
+(78, 102, 258),
+(79, 102, 259),
+(80, 17, 260),
+(81, 17, 261),
+(82, 17, 262),
+(83, 17, 263),
+(84, 17, 264),
+(85, 35, 267),
+(86, 35, 268),
+(87, 35, 268),
+(88, 35, 268),
+(89, 35, 268),
+(90, 35, 268),
+(91, 35, 268),
+(92, 35, 268),
+(93, 35, 268),
+(94, 35, 268),
+(95, 35, 268),
+(96, 35, 268),
+(97, 35, 268),
+(98, 35, 268),
+(99, 35, 268),
+(100, 35, 270),
+(101, 103, 270),
+(102, 39, 270),
+(103, 35, 271),
+(104, 103, 271),
+(105, 39, 271),
+(129, 31, 273),
+(130, 32, 273),
+(150, 1, 1),
+(151, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -293,7 +321,6 @@ CREATE TABLE `peliculas` (
 
 INSERT INTO `peliculas` (`id`, `titulo`, `año_estreno`, `genero_id`, `director`, `calificacion`) VALUES
 (1, 'El Exorcista', '1973', 1, 'William Friedkin', 8.0),
-(2, 'Psicosis', '1960', 1, 'Alfred Hitchcock', 8.5),
 (3, 'El Silencio de los Inocentes', '1991', 1, 'Jonathan Demme', 8.6),
 (4, 'El Conjuro', '2013', 1, 'James Wan', 7.5),
 (5, 'El Aro', '2002', 1, 'Gore Verbinski', 7.1),
@@ -311,7 +338,6 @@ INSERT INTO `peliculas` (`id`, `titulo`, `año_estreno`, `genero_id`, `director`
 (17, 'Forrest Gump', '1994', 2, 'Robert Zemeckis', 8.8),
 (18, 'Titanic', '1997', 2, 'James Cameron', 7.8),
 (19, 'El Padrino', '1972', 2, 'Francis Ford Coppola', 9.2),
-(20, 'Pulp Fiction', '1994', 2, 'Quentin Tarantino', 8.9),
 (21, 'La Lista de Schindler', '1993', 2, 'Steven Spielberg', 8.9),
 (22, 'Cadena Perpetua', '1994', 2, 'Frank Darabont', 9.3),
 (23, 'Ciudad de Dios', '2002', 2, 'Fernando Meirelles', 8.6),
@@ -366,7 +392,19 @@ INSERT INTO `peliculas` (`id`, `titulo`, `año_estreno`, `genero_id`, `director`
 (72, 'Star Wars: Episodio V - El Imperio Contraataca', '1980', 6, 'Irvin Kershner', 8.7),
 (73, 'Star Wars: Episodio VI - El Regreso del Jedi', '1983', 6, 'Richard Marquand', 8.3),
 (74, 'Matrix Reloaded', '2003', 6, 'Lana Wachowski, Lilly Wachowski', 7.2),
-(75, 'Matrix Revolutions', '2003', 6, 'Lana Wachowski, Lilly Wachowski', 6.8);
+(75, 'Matrix Revolutions', '2003', 6, 'Lana Wachowski, Lilly Wachowski', 6.8),
+(258, 'Nueva Película', '2024', 1, 'Director Nuevo', 8.5),
+(259, 'otra pelicula', '2024', 1, 'Director Nuevo', 8.5),
+(260, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(261, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(262, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(263, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(264, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(267, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(268, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(270, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(271, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
+(273, 'Pulp Fiction', '1994', 2, 'Quentin Tarantino', 8.9);
 
 -- --------------------------------------------------------
 
@@ -381,6 +419,15 @@ CREATE TABLE `usuarios` (
   `contraseña` varchar(255) NOT NULL,
   `fecha_registro` date DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre_usuario`, `correo_electronico`, `contraseña`, `fecha_registro`) VALUES
+(1, 'Mica', 'mica@example.com', '$2a$10$UHnN8n3zQSqeN/5rRowcv.k01vfFGYz/aIWoeX43mjKZs.N/vxGdK', '2024-06-30'),
+(2, 'Eric', 'eric@example.com', '$2a$10$6mqvTWkw7vEA5U2rIUxxf.dvQp3z8.Ho0wuLSVXkeuAsh3UE6Lwji', '2024-06-30'),
+(14, 'plkz', 'plkz@example.com', '$2a$10$aA0eb2cDYm9OPMfb5j8fjuyRANPZDdBpwMTpGIBP8v33n6Km1pIZW', '2024-06-30');
 
 --
 -- Índices para tablas volcadas
@@ -436,13 +483,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `actores`
 --
 ALTER TABLE `actores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT de la tabla `actores_peliculas`
 --
 ALTER TABLE `actores_peliculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
@@ -460,13 +507,13 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
