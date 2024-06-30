@@ -1,5 +1,6 @@
 const { connection } = require('../db/db');
 
+
 const crearUser = async (userData) => {
     const { nombre_usuario, correo_electronico, contraseña } = userData;
     const query = `
@@ -10,7 +11,7 @@ const crearUser = async (userData) => {
     const values = [nombre_usuario, correo_electronico, contraseña];
     //const [result] => utiliza desestructuración de arreglos en JavaScript para extraer el primer elemento del arreglo que retorna la función query.
     try {
-        const [result] = await connection.promise().query(query, values);
+        const [result] = await connection.query(query, values);
         return {
             id: result.insertId,
             ...userData
@@ -26,7 +27,7 @@ const getAllUsers = async () => {
     `;
 
     try {
-        const [rows] = await connection.promise().query(query);
+        const [rows] = await connection.query(query);
         return rows;        
     } catch (error) {
         throw new Error(error.message);
@@ -36,7 +37,7 @@ const getAllUsers = async () => {
 const getUserById = async (id) => {
     const query = 'SELECT * FROM usuarios WHERE id = ?';
     try {
-        const [user] = await connection.promise().query(query, [id]);
+        const [user] = await connection.query(query, [id]);
         return user[0];
     } catch (error) {
         throw new Error(error.message);
@@ -52,7 +53,7 @@ const updateUser = async (id, userData) => {
     const values = [nombre_usuario, correo_electronico, contraseña, id ];
 
     try {
-        const [result] = await connection.promise().query(query, values);
+        const [result] = await connection.query(query, values);
         return result.affectedRows;
     } catch (error) {
         throw new Error(error.message);
@@ -66,8 +67,19 @@ const deleteUserById = async (id) => {
     `;
 
     try {
-        const [result] = await connection.promise().query(query, [id]);
+        const [result] = await connection.query(query, [id]);
         return result.affectedRows;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+};
+
+const getUserByEmail = async (correo_electronico) => {
+    const query = `SELECT * FROM usuarios WHERE correo_electronico = ?`;
+
+    try {
+        const [user] = await connection.query(query, [correo_electronico]);
+        return user[0];
     } catch (error) {
         throw new Error(error.message);
     }
@@ -79,5 +91,6 @@ module.exports = {
     getAllUsers,
     getUserById,
     updateUser,
-    deleteUserById
+    deleteUserById,
+    getUserByEmail
 };

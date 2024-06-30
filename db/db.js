@@ -1,4 +1,38 @@
 require('dotenv').config();
+const mysql = require('mysql2/promise');
+
+// Crear un pool de conexiones, pero lo llamaremos 'connection'
+const connection = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'cac_movies_db',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+
+// Función para probar la conexión
+const testConnection = async () => {
+    try {
+        const conn = await connection.getConnection();
+        console.log('Conectado a la base de datos');
+        conn.release();
+    } catch (err) {
+        console.error('Error al conectarse a la base de datos:', err);
+    }
+};
+
+// Ejecutar la prueba de conexión
+testConnection();
+
+module.exports = {
+    connection
+};
+
+
+
+/*require('dotenv').config();
 const mysql = require('mysql2');
 
 // conectando a BD alwaysdata con .env
@@ -8,7 +42,7 @@ const mysql = require('mysql2');
     password: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
 });*/
-const connection = mysql.createConnection({
+/*const connection = mysql.createConnection({
 
     host: 'localhost',
     user: 'root',

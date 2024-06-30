@@ -1,23 +1,21 @@
 
-const {Usuario} = require('../models/Usuario.model')
+const { getUserByEmail, getUserById } = require('../models/Usuario.model');
 
-
-const emailExiste = async (correo = '') => {
-    //verificar si correo existe
-    const existeEmail = await Usuario.findOne({ correo });
+const emailExiste = async (correo_electronico = '') => {
+    const existeEmail = await getUserByEmail(correo_electronico);
     if (existeEmail) {
-        throw new Error(`el correo: ${correo}, ya esta registrado`)
+        throw new Error(`El correo: ${correo_electronico}, ya está registrado`);
     }
-}
-
+};
 
 const existeUsuarioPorId = async (id) => {
-    //verificar si existe usuario por ID
-    const existeUsuario = await Usuario.findById(id);
+    const existeUsuario = await getUserById(id);
     if (!existeUsuario) {
-        throw new Error(`el id no existe ${id}`);
+        throw new Error(`El ID no existe: ${id}`);
     }
-}
+};
+
+
 
 /*const existeCategoriaPorId = async (id) => {
     //verificar si id existe

@@ -4,6 +4,7 @@ const { generarJWT } = require('../helpers/generarJWT');
 const { connection } = require('../db/db'); // Asegúrate de tener la configuración de conexión a MySQL adecuada
 
 const login = async (req, res = response) => {
+    
     const { correo_electronico, contraseña } = req.body;
 
     try {

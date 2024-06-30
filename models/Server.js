@@ -14,6 +14,7 @@ class Server {
         this.paths = {
             auth:'/auth',
             usuarios: '/usuarios',
+            peliculas:'/peliculas'
             
             /*movies: '/movies',*/
 
@@ -57,8 +58,7 @@ class Server {
 
     routes() {
 
-        //this.app.use(this.paths.usuarios, require('../Routes/usuarios'));
-        //this.app.use(this.paths.movies, require('../Routes/movies.route'));
+        this.app.use(this.paths.peliculas, require('../routes/peliculas.router'));
         this.app.use(this.paths.auth, require('../routes/auth.router'));
         this.app.use(this.paths.usuarios, require('../routes/usuarios.router'));
     }

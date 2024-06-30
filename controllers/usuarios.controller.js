@@ -12,9 +12,6 @@ const obtenerUsuario = async (req, res) => {
     }
 };
 
-
-
-
 // OBTENER USUARIO POR ID
 const tenerUsuarioById = async (req, res) => {
     const { id } = req.params;
@@ -33,7 +30,7 @@ const tenerUsuarioById = async (req, res) => {
 const crearUsuario = async (req, res) => {
     const { nombre_usuario, correo_electronico, contraseña } = req.body;
     try {
-        // Generar la sal para el hash
+        // Generar el salto para el hash
         const salt = bcryptjs.genSaltSync();
         // Hashear la contraseña
         const hashedPassword = bcryptjs.hashSync(contraseña, salt);
@@ -50,7 +47,6 @@ const crearUsuario = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 //ACTUALIZAR USUARIO
 const actualizarUsuario = async (req, res) => {
@@ -83,6 +79,7 @@ const actualizarUsuario = async (req, res) => {
     }
 };
 
+//BORRAR USUARIO
 const borrarUsuarioById = async (req, res) => {
     const { id } = req.params;
 
