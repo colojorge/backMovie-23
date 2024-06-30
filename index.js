@@ -1,4 +1,18 @@
-const express = require('express');
+require('dotenv').config();
+const Server = require('./models/server');
+
+
+
+const server = new Server();
+
+server.listen();
+
+
+
+
+
+
+/*const express = require('express');
 const app = express();
 
 const path = require('path');
@@ -13,7 +27,7 @@ app.get('/', (req, res)=>{
     res.send('Proyecto integrador Grupo 23');
 });
 
-// comentario
+
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, ()=>{console.log(`http://localhost:${PORT}`)});
+app.listen(PORT, ()=>{console.log(`http://localhost:${PORT}`)});*/
