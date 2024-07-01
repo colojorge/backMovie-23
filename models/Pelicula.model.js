@@ -1,19 +1,19 @@
 const { connection } = require('../db/db');
 
+// CREAR PELICULAS
+
 const createMovie = async ({ titulo, año_estreno, genero_id, director, calificacion, nombre_actor }) => {
 
     let dbconnection;
 
     try {
 
-
-        /*Al iniciar una transacción, es crucial asegurarse de que todas las operaciones dentro de esa transacción se realicen utilizando la misma conexión. Esto garantiza que la transacción sea atómica, es decir, que todas las operaciones se completen correctamente o ninguna de ellas se aplique.*/
-
+        /*Al iniciar una transacción, es crucial asegurarse de que todas las operaciones dentro de esa transacción se realicen utilizando la misma conexión.*/
 
         // Obtener una conexión del pool
         dbconnection = await connection.getConnection();
 
-        /* TRANSACCION => secuencia de operaciones que se ejecutan como una unidad indivisible. Todas las operaciones se completan exitosamente o ninguna se realiza en absoluto.*/
+        /* TRANSACCION => secuencia de operaciones que se ejecutan como una unidad indivisible(atomica). Todas las operaciones se completan exitosamente o ninguna se realiza en absoluto.*/
 
         // Comenzar la transacción
         await dbconnection.beginTransaction();
@@ -75,6 +75,7 @@ const createMovie = async ({ titulo, año_estreno, genero_id, director, califica
     }
 };
 
+// OBTENER PELICULAS
 
 const getAllMovies = async () => {
     const query = `
@@ -85,28 +86,58 @@ const getAllMovies = async () => {
             p.genero_id,
             p.director,
             p.calificacion,
-            GROUP_CONCAT(a.nombre_actor) AS actores
+            GROUP_CONCAT(DISTINCT a.nombre_actor ORDER BY a.nombre_actor SEPARATOR ', ') AS actores,
+            c.id AS comentario_id,
+            c.comentario,
+            u.nombre_usuario AS nombre_usuario
         FROM 
             peliculas p
             LEFT JOIN actores_peliculas ap ON p.id = ap.pelicula_id
             LEFT JOIN actores a ON ap.actor_id = a.id
+            LEFT JOIN comentarios c ON p.id = c.pelicula_id
+            LEFT JOIN usuarios u ON c.usuario_id = u.id
         GROUP BY 
-            p.id
+            p.id, c.id
     `;
 
     try {
         const [rows] = await connection.query(query);
 
-        // Transformar el resultado para devolver un array de objetos con la película y los actores
-        const peliculas = rows.map(row => ({
-            id: row.pelicula_id,
-            titulo: row.titulo,
-            año_estreno: row.año_estreno,
-            genero_id: row.genero_id,
-            director: row.director,
-            calificacion: row.calificacion,
-            actores: row.actores ? row.actores.split(',') : []/*Convierte una cadena de nombres de actores separada por comas en un array de nombres o devuelve un array vacío si no hay actores.*/
-        }));
+        // Transformar el resultado para devolver un array de objetos con la película, actores y comentarios
+        const peliculasMap = {};
+
+        rows.forEach(row => {
+            if (!peliculasMap[row.pelicula_id]) {
+                peliculasMap[row.pelicula_id] = {
+                    id: row.pelicula_id,
+                    titulo: row.titulo,
+                    año_estreno: row.año_estreno,
+                    genero_id: row.genero_id,
+                    director: row.director,
+                    calificacion: row.calificacion,
+                    actores: row.actores ? row.actores.split(', ') : [],
+                    comentarios: row.comentario ? [{
+                        usuario: row.nombre_usuario,
+                        comentario: row.comentario
+                    }] : []
+                };
+            } else if (row.comentario) {
+                peliculasMap[row.pelicula_id].comentarios.push({
+                    usuario: row.nombre_usuario,
+                    comentario: row.comentario
+                });
+            }
+        });
+
+        // Convertir el mapa en un array
+        const peliculas = Object.values(peliculasMap);
+
+        // Añadir leyenda si no hay comentarios
+        peliculas.forEach(pelicula => {
+            if (pelicula.comentarios.length === 0) {
+                pelicula.comentarios = ['Esta película no tiene comentarios aún'];
+            }
+        });
 
         return peliculas;
     } catch (error) {
@@ -114,6 +145,8 @@ const getAllMovies = async () => {
     }
 };
 
+
+// OBTENER PELICULA POR ID
 
 const getMovieById = async (id) => {
     const queryPelicula = `
@@ -139,6 +172,7 @@ const getMovieById = async (id) => {
     }
 };
 
+// ACTUALIZAR PELICULA
 
 const updateMovie = async (id, peliculaData) => {
     const { titulo, año_estreno, genero_id, director, calificacion, actores } = peliculaData;
@@ -197,6 +231,7 @@ const updateMovie = async (id, peliculaData) => {
     }
 };
 
+// ELIMINAR PELICULA
 
 const deleteMovieById = async (id) => {
     let dbconnection;

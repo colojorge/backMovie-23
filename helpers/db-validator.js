@@ -18,15 +18,15 @@ const existeUsuarioPorId = async (id) => {
 };
 
 const existePelicula = async (req, res, next) => {
-    const { titulo } = req.body; // Obtén el título de la película desde el cuerpo de la solicitud
+    const { titulo } = req.body; 
 
     let dbconnection;
 
     try {
-        // Obtener una conexión del pool
+        // Obtener la conexion
         dbconnection = await connection.getConnection();
 
-        // Realizar la consulta para verificar la existencia de la película por título
+        // Consulta para verificar la existencia de la película por título
         const query = `SELECT * FROM peliculas WHERE titulo = ?`;
         const [result] = await dbconnection.query(query, [titulo]);
 
@@ -36,7 +36,7 @@ const existePelicula = async (req, res, next) => {
         }
 
         // Si no hay resultados, la película no existe
-        next(); // Continúa con el siguiente middleware (validarCampos)
+        next(); // Continúa con el siguiente middleware 
 
     } catch (error) {
         console.error('Error al verificar la existencia de la película:', error);

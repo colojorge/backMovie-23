@@ -1,9 +1,21 @@
 const express = require('express');
+const { check } = require('express-validator');
+
+const { obtenerComentarios, agregarComentario } = require('../controllers/comentarios.controller');
+const { existePeliculaPorId, existeUsuarioPorId } = require('../helpers/db-validator');
+
+const { validarCampos } = require('../middlewares/validar-campos');
+
+
 const router = express.Router();
 
-const controller = require('../controllers/comentarios.controller');
+router.get('/:id',[
+    check('id').custom(existePeliculaPorId),
+    validarCampos
+],obtenerComentarios ); 
 
-router.get('/', controller.resenias); // GET reseñas comentarios
-router.delete('/:id', controller.destroy); // DELETE reseñas comentarios
+router.post('/:id',[
+    check('id').custom(existePeliculaPorId),    
+], agregarComentario); 
 
 module.exports = router;
