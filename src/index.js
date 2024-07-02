@@ -4,12 +4,11 @@ const app = express();
 const path = require('path');
 
 app.use(express.json());
+const pelicuasRoutes = require("./routes")
 
-app.use('/actores', require("./routes/actores.router"));
-app.use('/generos', require("./routes/generos.router"));
-app.use('/comentarios', require("./routes/comentarios.router"));
+app.use(pelicuasRoutes);
 
-app.get('/', (req, res)=>{
+app.use('/', (req, res)=>{
     res.send('Proyecto integrador Grupo 23');
 });
 
