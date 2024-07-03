@@ -13,9 +13,6 @@ app.use('/calificacion', require("./routes/calificacion.router"));
 app.get('/', (req, res)=>{
     res.send('Proyecto integrador Grupo 23');
 });
-
-// comentario
-// comentarios nuevos
  
 const PORT = process.env.PORT || 3000;
 
