@@ -6,7 +6,7 @@ require('dotenv').config(); //conviene ejecutarlo en index.js para que este glob
 //     host: "localhost",
 //     user: "root",
 //     password: "",
-//     database: "personas",
+//     database: "colorete_movie_23",
 // });
 
 // conectando a BD alwaysdata
