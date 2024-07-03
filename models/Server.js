@@ -46,16 +46,8 @@ class Server {
 
         //directorio publico
         this.app.use(express.static('public'));
-
-        //Fileupload - carga de archivos
-        /*this.app.use(fileUpload({
-            useTempFiles:true,
-            tempFileDir:'/tmp/',
-            createParentPath: true
-        }));*/
-    }
-    /*Los endpoints de API suelen aceptar solicitudes HTTP (por ejemplo, GET, POST, PUT, DELETE) y devuelven respuestas en un formato específico, como JSON o XML.
-    endpoint es cualquier dispositivo o nodo que pueda enviar o recibir datos a través de una red*/
+        
+    }    
 
     routes() {
 

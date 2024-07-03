@@ -2,7 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 
 const { obtenerComentarios, agregarComentario } = require('../controllers/comentarios.controller');
-const { existePeliculaPorId, existeUsuarioPorId } = require('../helpers/db-validator');
+const { existePeliculaPorId } = require('../helpers/db-validator');
 
 const { validarCampos } = require('../middlewares/validar-campos');
 

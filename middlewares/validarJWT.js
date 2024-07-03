@@ -2,6 +2,10 @@ const { response } = require('express');
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../models/Usuario.model');
 
+
+
+// VALIDAR JWT
+
 const validarJWT = async(req, res = response, next) => {
     const token = req.header('x-token');
 

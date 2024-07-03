@@ -1,7 +1,7 @@
 // Importar la conexión a la base de datos
 const { connection } = require('../db/db');
 
-// Función para obtener todos los comentarios de una película por su ID
+// OBTENER TODOS LOS COMENTARIOS DE UNA PELICULA ESPECIFICA POR SU ID
 const commentsMovieId = async (peliculaId) => {
     const query = `
         SELECT c.id, c.comentario, u.nombre_usuario AS nombre_usuario
@@ -17,7 +17,7 @@ const commentsMovieId = async (peliculaId) => {
     }
 };
 
-// Función para crear un nuevo comentario
+// CREAR UN NUEVO COEMNTARIO
 const createComment = async (peliculaId, usuarioId, comentario) => {
     const query = `
         INSERT INTO comentarios (pelicula_id, usuario_id, comentario)
@@ -31,6 +31,8 @@ const createComment = async (peliculaId, usuarioId, comentario) => {
     }
 };
 
+
+//DETALLES DE LOS COMENTARIOS EN LAS PELICULAS
 const commentDetails = async (comentarioId) => {
     const query = `
         SELECT 

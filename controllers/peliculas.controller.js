@@ -1,5 +1,7 @@
 const { createMovie, getAllMovies, getMovieById, updateMovie, deleteMovieById } = require('../models/Pelicula.model');
 
+
+//OBTENER TODAS LAS PELICULAS
 const obtenerPeliculas = async (req, res) => {
     try {
         const peliculas = await getAllMovies();
@@ -9,6 +11,8 @@ const obtenerPeliculas = async (req, res) => {
     }
 };
 
+
+//OBTENER PELICULA POR ID
 const obtenerPeliculaPorId = async (req, res) => {
     try {
         const pelicula = await getMovieById(req.params.id);
@@ -21,6 +25,8 @@ const obtenerPeliculaPorId = async (req, res) => {
     }
 };
 
+
+//CREAR NUEVA PELICULA
 const crearPelicula = async (req, res) => {
     try {
         const newPelicula = await createMovie(req.body);
@@ -30,6 +36,8 @@ const crearPelicula = async (req, res) => {
     }
 };
 
+
+// ACTUALIZAR PELICULA
 const actualizarPelicula = async (req, res) => {
     try {
         const updatedRows = await updateMovie(req.params.id, req.body);
@@ -42,6 +50,8 @@ const actualizarPelicula = async (req, res) => {
     }
 };
 
+
+//ELIMINAR PELICULA
 const eliminarPelicula = async (req, res) => {
     try {
         const deletedRows = await deleteMovieById(req.params.id);

@@ -3,6 +3,8 @@ const { connection } = require('../db/db');
 const { getMovieById } = require('../models/Pelicula.model');
 const { getUserByEmail, getUserById } = require('../models/Usuario.model');
 
+
+//VERIFICACION CORREO_ELECTRONICO EXISTE
 const emailExiste = async (correo_electronico = '') => {
     const existeEmail = await getUserByEmail(correo_electronico);
     if (existeEmail) {
@@ -10,6 +12,8 @@ const emailExiste = async (correo_electronico = '') => {
     }
 };
 
+
+//VERIFICACION DE USUARIO POR ID
 const existeUsuarioPorId = async (id) => {
     const existeUsuario = await getUserById(id);
     if (!existeUsuario) {
@@ -17,6 +21,9 @@ const existeUsuarioPorId = async (id) => {
     }
 };
 
+
+
+//VERIFICACION SI EXISTE LA PELICULA
 const existePelicula = async (req, res, next) => {
     const { titulo } = req.body; 
 
@@ -50,7 +57,7 @@ const existePelicula = async (req, res, next) => {
 
 
 
-
+// VERIFICACION PELICULA POR ID
 const existePeliculaPorId = async (id) => {
     const existePelicula = await getMovieById(id);
     if (!existePelicula) {

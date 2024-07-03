@@ -1,6 +1,5 @@
 const { response } = require('express');
 
-
 const { commentsMovieId, createComment, commentDetails } = require('../models/Comentario.model');
 const { getMovieById } = require('../models/Pelicula.model'); // Asegúrate de importar el método getMovieById desde tu modelo de películas
 
@@ -8,6 +7,7 @@ const { getMovieById } = require('../models/Pelicula.model'); // Asegúrate de i
 
 const obtenerComentarios = async (req, res = response) => {
     const { id } = req.params;
+    
     try {
         // Obtener la película por su ID
         const pelicula = await getMovieById(id);

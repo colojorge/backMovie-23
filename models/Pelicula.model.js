@@ -7,10 +7,9 @@ const createMovie = async ({ titulo, año_estreno, genero_id, director, califica
     let dbconnection;
 
     try {
+        
 
-        /*Al iniciar una transacción, es crucial asegurarse de que todas las operaciones dentro de esa transacción se realicen utilizando la misma conexión.*/
-
-        // Obtener una conexión del pool
+        // Obtener la conexión al pool
         dbconnection = await connection.getConnection();
 
         /* TRANSACCION => secuencia de operaciones que se ejecutan como una unidad indivisible(atomica). Todas las operaciones se completan exitosamente o ninguna se realiza en absoluto.*/
@@ -22,12 +21,16 @@ const createMovie = async ({ titulo, año_estreno, genero_id, director, califica
 
         const queryPelicula = `INSERT INTO peliculas (titulo, año_estreno, genero_id, director, calificacion) VALUES (?, ?, ?, ?, ?)`;
         const valuesPelicula = [titulo, año_estreno, genero_id, director, calificacion];
+
         const [resultPelicula] = await dbconnection.query(queryPelicula, valuesPelicula);
+
         const idPelicula = resultPelicula.insertId;
+
 
         // 2. PROCESAR CADA ACTOR
 
         for (const nombreActor of nombre_actor) {
+            
             let idActor;
             const queryActor = `SELECT id FROM actores WHERE nombre_actor = ?`;
             const [resultActor] = await dbconnection.query(queryActor, [nombreActor]);

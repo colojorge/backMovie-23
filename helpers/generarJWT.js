@@ -11,7 +11,7 @@ const generarJWT = (uid = '') => {
             expiresIn: '76h'
 
 
-        }, (err, token) => {
+        }, (err, token) => {/* callback, por convencion se pone el error primero*/
 
             if (err) {
                 console.log(err);
