@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-06-2024 a las 23:52:14
+-- Tiempo de generación: 03-07-2024 a las 23:41:37
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -139,7 +139,10 @@ INSERT INTO `actores` (`id`, `nombre_actor`) VALUES
 (100, 'Tom Hiddleston'),
 (102, 'Nuevo Actor'),
 (103, 'Emma Stone'),
-(104, 'Robert De Nipo');
+(104, 'Robert De Nipo'),
+(105, 'Carrie-Anne Moss'),
+(106, 'coco'),
+(107, 'diego');
 
 -- --------------------------------------------------------
 
@@ -228,38 +231,16 @@ INSERT INTO `actores_peliculas` (`id`, `actor_id`, `pelicula_id`) VALUES
 (75, 76, 46),
 (76, 77, 47),
 (77, 78, 47),
-(78, 102, 258),
-(79, 102, 259),
-(80, 17, 260),
-(81, 17, 261),
-(82, 17, 262),
-(83, 17, 263),
-(84, 17, 264),
-(85, 35, 267),
-(86, 35, 268),
-(87, 35, 268),
-(88, 35, 268),
-(89, 35, 268),
-(90, 35, 268),
-(91, 35, 268),
-(92, 35, 268),
-(93, 35, 268),
-(94, 35, 268),
-(95, 35, 268),
-(96, 35, 268),
-(97, 35, 268),
-(98, 35, 268),
-(99, 35, 268),
-(100, 35, 270),
-(101, 103, 270),
-(102, 39, 270),
-(103, 35, 271),
-(104, 103, 271),
-(105, 39, 271),
 (129, 31, 273),
 (130, 32, 273),
 (150, 1, 1),
-(151, 2, 1);
+(151, 2, 1),
+(158, 67, 75),
+(159, 105, 75),
+(164, 106, 279),
+(165, 107, 279),
+(166, 106, 74),
+(167, 107, 74);
 
 -- --------------------------------------------------------
 
@@ -274,6 +255,20 @@ CREATE TABLE `comentarios` (
   `comentario` text NOT NULL,
   `fecha_comentario` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id`, `usuario_id`, `pelicula_id`, `comentario`, `fecha_comentario`) VALUES
+(1, 1, 10, 'Esta es una excelente película.', '2024-06-30 21:41:09'),
+(2, 1, 10, 'Esta es una excelente película.', '2024-06-30 21:47:14'),
+(3, 1, 10, 'Esta es una excelente película.', '2024-06-30 21:47:56'),
+(4, 14, 10, 'muy buena peli!!', '2024-06-30 21:52:26'),
+(6, 14, 10, 'muy buena peli!!', '2024-06-30 22:05:11'),
+(7, 14, 75, 'la mejor de todas', '2024-06-30 22:11:29'),
+(8, 2, 273, 'Esta es una excelente película.', '2024-07-03 00:16:03'),
+(9, 14, 273, 'muy buena peli', '2024-07-03 00:16:28');
 
 -- --------------------------------------------------------
 
@@ -393,18 +388,8 @@ INSERT INTO `peliculas` (`id`, `titulo`, `año_estreno`, `genero_id`, `director`
 (73, 'Star Wars: Episodio VI - El Regreso del Jedi', '1983', 6, 'Richard Marquand', 8.3),
 (74, 'Matrix Reloaded', '2003', 6, 'Lana Wachowski, Lilly Wachowski', 7.2),
 (75, 'Matrix Revolutions', '2003', 6, 'Lana Wachowski, Lilly Wachowski', 6.8),
-(258, 'Nueva Película', '2024', 1, 'Director Nuevo', 8.5),
-(259, 'otra pelicula', '2024', 1, 'Director Nuevo', 8.5),
-(260, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(261, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(262, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(263, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(264, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(267, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(268, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(270, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(271, 'otra pelicula mas', '2024', 1, 'Director Nuevo', 8.5),
-(273, 'Pulp Fiction', '1994', 2, 'Quentin Tarantino', 8.9);
+(273, 'Pulp Fiction', '1994', 2, 'Quentin Tarantino', 8.9),
+(279, 'la cenicienta', '1994', 2, 'Quentin Tarantino', 8.9);
 
 -- --------------------------------------------------------
 
@@ -427,7 +412,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `correo_electronico`, `contraseña`, `fecha_registro`) VALUES
 (1, 'Mica', 'mica@example.com', '$2a$10$UHnN8n3zQSqeN/5rRowcv.k01vfFGYz/aIWoeX43mjKZs.N/vxGdK', '2024-06-30'),
 (2, 'Eric', 'eric@example.com', '$2a$10$6mqvTWkw7vEA5U2rIUxxf.dvQp3z8.Ho0wuLSVXkeuAsh3UE6Lwji', '2024-06-30'),
-(14, 'plkz', 'plkz@example.com', '$2a$10$aA0eb2cDYm9OPMfb5j8fjuyRANPZDdBpwMTpGIBP8v33n6Km1pIZW', '2024-06-30');
+(14, 'plkz', 'plkz@example.com', '$2a$10$yg2RV4S4PXAyzHuFKpkuDOxJBj1M71XiFVEmvH3VvjQhkavXjdO.6', '2024-06-30');
 
 --
 -- Índices para tablas volcadas
@@ -483,19 +468,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `actores`
 --
 ALTER TABLE `actores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT de la tabla `actores_peliculas`
 --
 ALTER TABLE `actores_peliculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `generos`
@@ -507,13 +492,13 @@ ALTER TABLE `generos`
 -- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=280;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
