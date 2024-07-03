@@ -3,23 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-colorete.alwaysdata.net
--- Generation Time: Jun 26, 2024 at 04:44 AM
+-- Generation Time: Jun 28, 2024 at 12:04 AM
 -- Server version: 10.6.17-MariaDB
 -- PHP Version: 7.4.33
-
-
--- ****************************** COMANDO: ejecutar tablas enlazadas  *************
---SELECT * 
---FROM `actores`
---INNER JOIN peliculas ON peliculas.id = actores.pelicula_id
-
---SELECT * 
---FROM `usuarios`
---INNER JOIN peliculas ON peliculas.id = usuarios.pelicula_id
-
--- ********************************* FIN comandos ejecución **************************
-
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -155,6 +141,19 @@ INSERT INTO `peliculas` (`id`, `titulo`, `año_estreno`, `genero_id`, `director`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `preferencias`
+--
+
+CREATE TABLE `preferencias` (
+  `preferencia_id` int(11) NOT NULL,
+  `id_pelicula` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `comentario` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -173,7 +172,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre_usuario`, `correo_electronico`, `contraseña`, `fecha_registro`, `pelicula_id`) VALUES
 (25, 'juan.perez', 'juan.perez@example.com', 'contraseña123', '2023-01-01', 13),
-(26, 'maria.gomez', 'maria.gomez@example.com', 'contraseña123', '2023-01-02', 14),
+(26, 'maria.gomez', 'maria.gomez@example.com', 'contraseña123', '2023-01-02', 13),
 (27, 'pedro.lopez', 'pedro.lopez@example.com', 'contraseña123', '2023-01-03', 3),
 (28, 'ana.martinez', 'ana.martinez@example.com', 'contraseña123', '2023-01-04', 4),
 (29, 'carlos.sanchez', 'carlos.sanchez@example.com', 'contraseña123', '2023-01-05', 5),
@@ -216,6 +215,14 @@ ALTER TABLE `peliculas`
   ADD KEY `genero_id` (`genero_id`);
 
 --
+-- Indexes for table `preferencias`
+--
+ALTER TABLE `preferencias`
+  ADD PRIMARY KEY (`preferencia_id`),
+  ADD KEY `id_pelicula` (`id_pelicula`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -251,6 +258,12 @@ ALTER TABLE `peliculas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `preferencias`
+--
+ALTER TABLE `preferencias`
+  MODIFY `preferencia_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -271,6 +284,13 @@ ALTER TABLE `actores`
 --
 ALTER TABLE `peliculas`
   ADD CONSTRAINT `peliculas_ibfk_1` FOREIGN KEY (`genero_id`) REFERENCES `generos` (`id`);
+
+--
+-- Constraints for table `preferencias`
+--
+ALTER TABLE `preferencias`
+  ADD CONSTRAINT `preferencias_ibfk_1` FOREIGN KEY (`id_pelicula`) REFERENCES `peliculas` (`id`),
+  ADD CONSTRAINT `preferencias_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Constraints for table `usuarios`
