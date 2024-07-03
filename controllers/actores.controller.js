@@ -1,4 +1,4 @@
-// get y get id
+// get y getid prueba
 const db = require('../db/db');
  
 const index = (req, res) => {
